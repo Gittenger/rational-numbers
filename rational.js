@@ -8,8 +8,12 @@ class Rat {
 	constructor(a, b) {
 		const g = gcd(a, b)
 
-		this.num = a / g
-		this.den = b / g
+		if (b !== 0) {
+			this.num = a / g
+			this.den = b / g
+		} else {
+			throw new Error('denominator cannot be 0')
+		}
 	}
 
 	// mult, div, etc as static methods
@@ -18,7 +22,9 @@ class Rat {
 	}
 
 	static div(x, y) {
-		return new Rat(x.num * y.den, y.num * x.den)
+		if (y.num === 0) {
+			throw new Error('cannot divide by zero')
+		} else return new Rat(x.num * y.den, y.num * x.den)
 	}
 
 	static add(x, y) {
@@ -34,15 +40,19 @@ class Rat {
 	}
 
 	static print(x) {
-		return console.log(`${x.num}/${x.den}`)
+		let printStr = `${x.num}/${x.den}`
+		if (x.num === 0) {
+			printStr = '0'
+		}
+		return console.log(printStr)
 	}
 }
 
 // instantiante new Rats
-const r1 = new Rat(2, 6)
-const r2 = new Rat(1, 3)
+const r1 = new Rat(0, 2)
+const r2 = new Rat(1, 2)
 
-const testRat = Rat.add(r1, r2)
+const testRat = Rat.div(r2, r1)
 
 console.log(Rat.checkEq(r1, r2))
 
