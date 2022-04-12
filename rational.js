@@ -29,16 +29,22 @@ class Rat {
 		return new Rat(x.num * y.den - y.num * x.den, x.den * y.den)
 	}
 
+	static checkEq(x, y) {
+		return x.num * y.den === y.num * x.den
+	}
+
 	static print(x) {
 		return console.log(`${x.num}/${x.den}`)
 	}
 }
 
 // instantiante new Rats
-const r1 = new Rat(2, 5)
+const r1 = new Rat(2, 6)
 const r2 = new Rat(1, 3)
 
 const testRat = Rat.add(r1, r2)
+
+console.log(Rat.checkEq(r1, r2))
 
 // use print fn to print as Rat
 Rat.print(testRat)
